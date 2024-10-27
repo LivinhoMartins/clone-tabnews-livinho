@@ -6,10 +6,4 @@ function Home() {
     </h1>
   );
 }
-
-function teste() {}
-function teste() {
-  console.log("indentação errada");
-}
-
 export default Home;
