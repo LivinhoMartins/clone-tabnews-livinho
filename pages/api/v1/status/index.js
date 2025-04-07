@@ -1,5 +1,4 @@
 import database from "infra/database.js";
-import { getTimestamp } from "node-pg-migrate/dist/migration";
 
 async function status(request, response) {
   const updatedAT = new Date().toISOString();
