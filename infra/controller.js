@@ -1,4 +1,9 @@
-import { InternalServerError, MethodNoAllowedError } from "infra/errors";
+import {
+  InternalServerError,
+  MethodNoAllowedError,
+  ValidationError,
+  NotFoundError,
+} from "infra/errors";
 
 function onNomatchHandler(request, response) {
   const publicErrorObject = new MethodNoAllowedError();
@@ -6,6 +11,10 @@ function onNomatchHandler(request, response) {
 }
 
 function onErrorHandler(error, request, response) {
+  if (error instanceof ValidationError || error instanceof NotFoundError) {
+    return response.status(error.statusCode).json(error);
+  }
+
   const publicErrorObject = new InternalServerError({
     statusCode: error.statusCode,
     cause: error,
